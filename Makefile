@@ -8,7 +8,9 @@ SRC_FILES := ${wildcard $(SLIDES_DIR)/*.md}
 
 OUTFILES := ${patsubst $(SLIDES_DIR)/%.md,$(OUTPUT)/%/index.html,$(SRC_FILES)}
 
-.PHONY: slides
+.PHONY: all slides
+
+all: slides
 
 slides: $(OUTFILES)
 
