@@ -1,17 +1,16 @@
+OUTPUT := _out
+
 REVEAL_MD := ./node_modules/.bin/reveal-md
-REVEAL_FLAGS := --static _out/
-ROOT_DIRECTORY = .
-DIRS := ${sort ${dir ${wildcard ${ROOT_DIRECTORY}/slides/*/}}}
+REVEAL_FLAGS := --static
 
-.PHONY: list $(DIRS)
+SLIDES_DIR := slides
+SRC_FILES := ${wildcard $(SLIDES_DIR)/*.md}
 
-install:
-	@npm install
+OUTFILES := ${patsubst $(SLIDES_DIR)/%.md,$(OUTPUT)/%/index.html,$(SRC_FILES)}
 
-$(DIRS):
-	$(info $@)
-	@mkdir -p _out/$@
-	$(REVEAL_MD) $(REVEAL_FLAGS)$@ $@
+.PHONY: slides
 
-list: $(DIRS)
-	@ tree _out
+slides: $(OUTFILES)
+
+$(OUTPUT)/%/index.html: $(SLIDES_DIR)/%.md
+	$(REVEAL_MD) $(REVEAL_FLAGS) ${dir $@} $<
