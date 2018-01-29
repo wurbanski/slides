@@ -1,0 +1,19 @@
+{
+  "name": "slides",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "reveal-md": "^1.1.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wurbanski/slides.git"
+  },
+  "author": "Wojciech Urbański",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/wurbanski/slides/issues"
+  },
+  "homepage": "https://github.com/wurbanski/slides#readme"
+}
