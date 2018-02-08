@@ -8,9 +8,17 @@ SRC_FILES := ${wildcard $(SLIDES_DIR)/*.md}
 
 OUTFILES := ${patsubst $(SLIDES_DIR)/%.md,$(OUTPUT)/%/index.html,$(SRC_FILES)}
 
-.PHONY: all slides
+.PHONY: all slides index clean
 
-all: slides
+all: slides index
+
+clean:
+	@test -d $(OUTPUT) && rm -rf $(OUTPUT)
+
+index: $(OUTPUT)/index.html
+
+$(OUTPUT)/index.html: generate_index.py
+	./generate_index.py
 
 slides: $(OUTFILES)
 

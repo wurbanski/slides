@@ -14,6 +14,8 @@ index = env.get_template('index.html')
 
 for slides in glob('slides/*.md'):
     slideset = frontmatter.load(slides)
+if not os.path.exists('_out'):
+    os.makedirs('_out')
 
 with open('_out/index.html', 'w') as index_file:
     index_file.write(index.render())
