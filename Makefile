@@ -18,7 +18,7 @@ __create:
 clean:
 	@test ! -d $(OUTPUT) || rm -rf $(OUTPUT)
 
-index: __create $(OUTPUT)/index.html
+index: __create slides $(OUTPUT)/index.html
 
 $(OUTPUT)/index.html: generate_index.py
 	@./generate_index.py $(SLIDES_DIR)

@@ -13,18 +13,22 @@ if __name__ == '__main__':
     else:
         print("Not enough arguments. Exiting...")
         exit(1)
-    
+
     env = Environment(
         loader=PackageLoader('generate_index', 'templates'),
         autoescape=select_autoescape(['html', 'xml'])
     )
-    
+
     index = env.get_template('index.html')
-    
+
+    slidesets = []
     for slides in glob(os.path.join(slides_dir, '*.md')):
-        slideset = frontmatter.load(slides)
-    
+        identifier = os.path.splitext(os.path.basename(slides))[0]
+        md_file = frontmatter.load(slides)
+        slidesets.append(dict(identifier=identifier,
+                              metadata=md_file.metadata))
+
     with open('index.html', 'w') as index_file:
-        index_file.write(index.render())
-    
+        index_file.write(index.render(slidesets=slidesets))
+
     print("Written index.html.")

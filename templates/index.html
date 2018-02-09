@@ -1,3 +1,70 @@
 <html>
-<h1>O hai </h1>
+    <head>
+        <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+				<style>
+body {
+	width: 100wh;
+	height: 90vh;
+	background: linear-gradient(-45deg, #00487c, #3e6680, #153b50);
+	background-size: 300% 300%;
+	-webkit-animation: Gradient 60s ease infinite;
+	-moz-animation: Gradient 60s ease infinite;
+	animation: Gradient 60s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+</style>
+    </head>
+    <div class="container-fluid">
+{% for slideset in slidesets %}
+<div class="row">
+<div class="col-sm-8 offset-sm-2 my-3">
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">{{ slideset['metadata']['title'] }}</h2>
+    <p class="card-text"><a href="{{ slideset['identifier'] }}">Link</a></p>
+    </div>
+</div>
+</div>
+</div>
+{% endfor %}
+    </div>
 </html>
