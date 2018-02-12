@@ -29,6 +29,6 @@ if __name__ == '__main__':
                               metadata=md_file.metadata))
 
     with open('index.html', 'w') as index_file:
-        index_file.write(index.render(slidesets=slidesets))
+        index_file.write(index.render(slidesets=slidesets).encode("utf-8"))
 
     print("Written index.html.")
