@@ -5,7 +5,8 @@ presented:
   - date: 15.02.2018
     where: SysOps/DevOps Meetup Gdańsk #2
 revealOptions:
-  transition: none
+  transition: fade
+  transitionSpeed: normal
   slideNumber: true
   overview: true
   width: 100%
@@ -13,7 +14,14 @@ revealOptions:
 
 ---
 
-### Czy Windows w systemie Continuous Integration może być obywatelem pierwszej kategorii?
+<style>
+.reveal .stretch > code {
+  max-height: none !important;
+  height: auto !important;
+}
+</style>
+
+## Czy Windows w systemie Continuous Integration może być obywatelem pierwszej kategorii?
 
 Wojciech Urbański
 
@@ -118,6 +126,10 @@ System ma być dostępny dla programistów bez konieczności ciągłej kontroli 
 
 ---
 
+# Case study
+
+---
+
 ## Zarządzanie konfiguracją na Windowsie
 
 1. [Powershell Desired State Configuration](https://docs.microsoft.com/en-us/powershell/dsc/overview)
@@ -184,10 +196,11 @@ Minusy:
 - wykorzystuje *Powershell* do wykonywania operacji
 - można go wykorzystać jako wrapper na DSC
 - zdecentralizowany
+- [Ansible Galaxy!](https://galaxy.ansible.com)
 
 ---
 
-## Ansible + Windows = ❤️
+## Ansible ❤ Windows
 
 Używa natywnego powershellowego połączenia przez bibliotekę `pywinrm`.
 
@@ -268,9 +281,68 @@ Zainstalujmy `Docker-EE` z natywnymi kontenerami na Windows Server 2016:
     arguments: /Quiet /NoWeb /InstallSelectableItems
 ```
 
+----
+
+## Chocolatey
+
+*__The__ package manager for windows.*
+
+Powershellowe opakowania na automatyczne instalatory z sensownymi wartościami domyślnymi.
+
+Pokaźne repozytorium paczek dodawanych przez społeczność.
+
+Wersja darmowa raczej ryzykowna dla *enterprise*'u:
+- brak instalacji bez dostęu do Internetu
+- brak automatycznej *rekompilacji* pakietów
+
+[chocolatey.org](https://chocolatey.org)
+
+----
+
+## Napisałem role dla moich serwerów, co dalej?
+
+Odpal ansibla, wypij ~~kawę~~yerbę, poprzeglądaj ~~kotki~~branżowe strony w sieci.
+
+TODO: My code is compiling!
+
 ---
 
-## Niezmienność infrastruktury
+## Etapy tworzenia maszyn wirtualnych z Windowsem
+
+1. Zaprzeczenie
+2. Gniew
+3. Targowanie
+4. Depresja
+5. Akceptacja
+
+<!-- .element class="fragment" -->
+
+# xD
+<!-- .element class="fragment" -->
+
+----
+
+## Etapy tworzenia maszyn wirtualnych z Windowsem
+
+1. Ustawienia podstawowe
+
+  Konta użytkowników, instalacja aktualizacji, konfiguracja sieci. (40 - &infin; minut)
+
+<!-- .element class="fragment" -->
+2. Konfiguracja do realizacji zadania
+
+  Instalacja kompilatorów, narzędzi, Dockera, koparki bitcoinów... (20-60 minut)
+
+<!-- .element class="fragment" start="2" -->
+3. Właściwe wdrożenie maszyny do systemu
+
+  Wpięcie jako agenta, włączenie monitoringu... (~5 minut)
+
+<!-- .element class="fragment" start="3" -->
+
+----
+
+## Cykl życia maszyny wirtualnej
 
 TODO: Obrazek
 ```
@@ -279,34 +351,73 @@ Bazowy obraz systemu -> Obraz roli w systemie -> Deployment i finalizacja maszyn
 
 ----
 
-## Coś więcej o tworzeniu obrazów
-
-----
-
 ## Wprowadzanie zmian do obrazów
 
-1. Zmiana w kodzie ansiblowym odpowiedniej roli
-2. Jenkins uruchamia build nowego obrazu i zapisuje go jako template
-3. 
-4. 
+```
+ +-----------------+
+ | Zmiany w rolach +-+
+ +-----------------+ |
+                     |
++--------------+     |   +------+      +-------+
+| Bazowy obraz +-----+-->+ Rola +--+-->+ Start |
++-------+------+         +------+  |   +-------+
+        ^                          |
++-------+-------+  +---------+     |
+| Patch Tuesday |  | Trigger +-----+
++---------------+  +---------+
+
+```
 
 ---
 
 ## Janie, przetestuj proszę
 
-Jenkins
+Jenkins - mój ulubiony frontend do crona.
 
-pipeline plugin
+Wersja 2.0+ - wbudowany **pipeline plugin**!
+
+Kod wykorzystywany do testowania konfiguracji przechowywany wspólnie z nią w repozytorium gitowym.
 
 ----
 
-## Dodatek: dynamiczne rozszerzanie Jenkinsa
+## `CIfIaCaC`
 
-Swarm plugin
+`Continuous Integration for Infrastracture as Code as Code`
 
-rola ansiblowa
+```groovy
+pipeline {
+  agent { label "ansible" }
+  stages {
+    stage "Prepare config" {
+      prepareConfig "builder"
+    }
+    stage "Run Ansible" {
+      dir "ansible" {
+        ansiblePlaybook inventory: 'inventory',
+                        playbook: 'deploy.yml'
+      }
+    }
+  }
+  post {
+    always {
+      deleteDir /* sprzątamy */ 
+    }
+  }
+}
+```
+<!-- .element class="stretch" -->
 
-labelki 
+----
+
+## Dynamiczne rozszerzanie Jenkinsa
+
+Klasyczna instalacja agenta przez Java Web Start wymaga przeglądarki.
+
+SSH Agent? <!-- .element class="fragment" -->
+
+[Swarm plugin!](https://plugins.jenkins.io/swarm)<!-- .element class="fragment" -->
+
+[Rola w Galaxy](https://galaxy.ansible.com/reynn/jenkins-swarm/) <!-- .element class="fragment" -->
 
 ---
 
@@ -323,6 +434,8 @@ pyVmomi na ratunek
 Terraform?
 
 Packer?
+
+Boxstarter
 
 ---
 
