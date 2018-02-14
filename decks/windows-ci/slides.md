@@ -672,7 +672,7 @@ Note:
 ---
 
 <!-- .slide: class="center pic-bg" data-background="./images/bg-newyork.jpg" -->
-# Czy Windows w systemie Continuous Integration może nie być obywatelem gorszego sortu?
+## Czy Windows w systemie Continuous Integration może nie być obywatelem gorszego sortu?
 
 Note:
 
