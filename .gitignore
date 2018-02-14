@@ -60,3 +60,4 @@ typings/
 _out
 __pycache__
 *.pyc
+*.pdf
