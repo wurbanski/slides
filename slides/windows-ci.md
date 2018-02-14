@@ -12,12 +12,15 @@ revealOptions:
   overview: true
   center: false
 
-
 ---
 
-<!-- .slide: class="center" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-mountainroad.jpg" -->
 
 <style>
+
+.reveal {
+  font-size: 36px;
+}
 
 .reveal pre {
   font-size: .4em !important;
@@ -40,12 +43,13 @@ revealOptions:
 }
 
 .reveal blockquote {
-  width: 90%;
+  width: 100%;
+  font-size: .8em;
 }
 
 .reveal .stretch > code {
-  max-height: none !important;
-  height: auto !important;
+  /*max-height: none !important;*/
+  /*height: auto !important;*/
 }
 
 .reveal section img {
@@ -63,8 +67,22 @@ revealOptions:
   margin: auto !important;
 }
 
-.reveal li {
-  margin: .5em;
+.reveal ul > li {
+  margin: 0 .5em;
+}
+
+.reveal ol > li {
+  margin: .5em .5em;
+}
+
+.reveal code:not(.hljs) {
+  font-size: 0.8em;
+}
+
+.pic-bg p {
+  background: rgba(255,255,255,0.75);
+  border-radius: 10px;
+  padding: 10px;
 }
 </style>
 
@@ -94,17 +112,16 @@ Note: Zanim zaczniemy, wyjaśnijmy kilka spraw. (...) Chętnie przedyskutuję al
 
 ---
 
+<!-- .slide: data-background="./images/bg-about.jpg" -->
 ## O mnie
 
-Inżynier i magister. DevOps w sercu.
+**Początki:** Administrator SKOS PG. Całe *życie zawodowe* w CI.
 
-Początki: Administrator SKOS PG. Życie zawodowe w CI.
-
-Automatyzacja, statystyki, monitoring.
+**Zainteresowania IT:** Automatyzacja, statystyki, monitoring.
 
 Gdy brakuje mi narzędzi, to je sobie piszę. (Głównie w pythonie)
 
-W wolnym czasie: gram, trochę podróżuję, robię zdjęcia telefonem. (:
+**W wolnym czasie:** gram, trochę podróżuję, robię zdjęcia telefonem. (:
 
 [github](https://github.com/wurbanski/) - [twitter](https://twitter.com/wurbansk) - [blog](https://blog.wurbanski.me) - [e-mail](mailto:hello@wurbanski.me)
 
@@ -116,13 +133,13 @@ Note:
 
 # Zadanie
 
-Zajmij się systemem CI <!-- .element class="fragment" -->
+Zajmij się systemem CI <!-- .element: class="fragment" -->
 
-dla projektu Windowsowego... <!-- .element class="fragment" -->
+dla projektu Windowsowego... <!-- .element: class="fragment" -->
 
-związanego z SDN... <!-- .element class="fragment" -->
+związanego z SDN... <!-- .element: class="fragment" -->
 
-będącego portem z Linuksa. <!-- .element class="fragment" -->
+będącego portem z Linuksa. <!-- .element: class="fragment" -->
 
 Note: Postawcie się w sytuacji: trafiacie do nowego projektu. Dostajecie zadanie...
 (...)
@@ -135,18 +152,27 @@ typowe dla DevOpsa
 
 1. Ścisła definicja konfiguracji potrzebnych maszyn
 2. Odporność na złośliwe akcje z zewnątrz
-3. Określone wymagania sieciowe (o tym później)
 4. Jak największa bezobsługowość
 5. Wspólne rozwiązania dla różnych platform - duży plus
 
 Note: (...) Brzmi łatwo, nie?
 
+----
+
+<!-- .slide: class="center pic-bg" data-background="./images/bg-watdo.jpg" -->
+
+please advise <!-- .element: class="fragment" -->
+
+wat do <!-- .element: class="fragment" -->
+
+Note: Może spróbujmy to zrobić tak, jak z Linuksem?
+
 ---
 
-<!-- .slide: class="center" data-background='./images/bg1.png' -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-mountain.jpg" -->
 # Zrób to tak, żeby było dobrze
 
-...i najlepiej na wczoraj ;-) <!-- .element class="fragment" -->
+...i najlepiej na wczoraj ;-) <!-- .element: class="fragment" -->
 
 Note: 
 
@@ -158,7 +184,7 @@ System ma być dostępny dla programistów.
 
 Najlepiej bez konieczności ciągłej kontroli i interwencji zespołu *DevOps*. 
 
-<!-- .element class="fragment" -->
+<!-- .element: class="fragment" -->
 
 <div class="fragment">
 <blockquote>
@@ -197,10 +223,10 @@ Note: Skorzystajmy więc z arsenału progamistów, aby chronić przed nimi nasz 
 
 ## Czego nam potrzeba?
 
-1. Skutecznego i prostego zarządzania konfiguracją systemów.
-2. Niezmienności infrastruktury.
-3. Automatyzacji wprowadzania zmian (CI/CD dla infrastruktury).
-4. Możliwości nadzoru nad kodem, który wpływa na infrastrukturę.
+1. Skutecznego i prostego zarządzania konfiguracją systemów. <!-- .element: class="fragment" -->
+2. Niezmienności infrastruktury. <!-- .element: class="fragment" -->
+3. Automatyzacji wprowadzania zmian (CI/CD dla infrastruktury). <!-- .element: class="fragment" -->
+4. Możliwości nadzoru nad kodem, który wpływa na infrastrukturę. <!-- .element: class="fragment" -->
 
 Note: Po takiej krótkiej analizie, bazując na doświadczeniach swoich i innych, można zebrać kilka istotnych dla nas kwestii przy projektowaniu systemu.
 
@@ -208,14 +234,7 @@ Note: Po takiej krótkiej analizie, bazując na doświadczeniach swoich i innych
 
 ---
 
-<!-- .slide: class="center" -->
-# Case study
-
-Note: 
-
----
-
-<!-- .slide: class="center" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-server.jpg" -->
 # Zarządzanie konfiguracją
 
 Note:
@@ -243,9 +262,9 @@ Podejście Microsoftu do Configuration Managementu.
 
 Obsługuje tryby *push* i *pull*.
 
-Długa lista zarządzalnych zasobów (wszystkie elementy systemów).
+Długa lista zarządzalnych zasobów (wszystkie elementy systemu Windows).
 
-(Subiektywnie) Skomplikowany system przygotowywania konfiguracji serwerów.
+`<subiektywnie>` Skomplikowany system przygotowywania konfiguracji serwerów. `</subiektywnie>`
 
 Note: Microsoftowe podejście do tematu IaC. Jest architektura Push/Pull
 
@@ -270,7 +289,6 @@ Configuration WebsiteTest {
     }
 }
 ```
-<!-- .element class="stretch" -->
 
 Note: Fragment kodu odpowiadający za konfigurację IIS i przykładowej strony WWW. Składnia niby podobna do innych systemów.
 
@@ -322,7 +340,7 @@ Note: Znane rozwiązania.
 - zdecentralizowany
 - [Ansible Galaxy!](https://galaxy.ansible.com)
 
-Note: Ansible.
+Note: Ansible. Also: używamy do już w projekcie.
 
 ---
 
@@ -353,8 +371,7 @@ powershell.exe -File ConfigureRemotingForAnsible.ps1 -EnableCredSSP -ForceNewSSL
 1. Odpowiednie zmienne w `inventory` dla ansible'a: 
 
 <!-- .element: start="2" -->
-
-```yaml
+  ```yaml
 ansible_user: Administrator
 ansible_password: SecretPasswordGoesHere
 ansible_port: 5986
@@ -393,13 +410,15 @@ Zainstalujmy `Docker-EE` z natywnymi kontenerami na Windows Server 2016:
 - name: Instalacja Docker-EE
   win_shell: "Install-Package Docker -ProviderName DockerProvider -Force"
 ```
-<!-- .element class="stretch" -->
+<!-- .element: class="stretch" -->
 
 Note: Zobaczmy, jak wygląda instalacja Dockera Enterprise (licencja wspólnie z licencja na Windows Server)
 
 ----
 
-## Zarządzanie zainstalowanymi aplikacjami
+## Zarządzanie aplikacjami
+
+Korzystając z pakietów MSI:
 
 ```yaml
 # Korzystając z pakietów MSI
@@ -409,8 +428,11 @@ Note: Zobaczmy, jak wygląda instalacja Dockera Enterprise (licencja wspólnie z
     state: present
     product_id: '{79750C81-714E-45F2-B5DE-42DEF00687B8}'
     arguments: /Quiet /NoWeb /InstallSelectableItems
+```
 
-# Korzystając z chocolatey
+Korzystając z chocolatey:
+
+```yaml
 - name: Install python 2.7.13
   win_chocolatey:
     name: python2
@@ -445,13 +467,13 @@ Note: Manager pakietów dla Windowsa. Microsoft zrobił również wewnętrzny sy
 
 Odpal ansibla, wypij ~~kawę~~yerbę, poprzeglądaj ~~kotki~~branżowe strony w sieci.
 
-[![compiling](images/compiling.png)](https://xkcd.com/303/) <!-- .element class="fragment stretch" -->
+[![compiling](images/compiling.png)](https://xkcd.com/303/) <!-- .element: class="fragment stretch" -->
 
 Note: Uzbrój się w cierpliwość, szczególnie jeśli chcesz instalować Visual Studio.
 
 ---
 
-<!-- .slide: class="center" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-immutable.jpg" -->
 # Niezmienność infrastruktury
 
 aka *Immutable infrastructure*
@@ -468,7 +490,7 @@ Note:
 4. Depresja
 5. Akceptacja
 
-<!-- .element class="fragment" -->
+<!-- .element: class="fragment" -->
 
 Note: Hehe.
 
@@ -476,9 +498,9 @@ Note: Hehe.
 
 ## Etapy tworzenia maszyny z Windowsem
 
-1. Ustawienia podstawowe (40 - &infin; minut) <!-- .element class="fragment" -->
-2. Konfiguracja do realizacji zadania (20-60 minut) <!-- .element class="fragment" start="2" -->
-3. Właściwe wdrożenie maszyny do systemu (~5 minut) <!-- .element class="fragment" start="3" -->
+1. Ustawienia podstawowe (40 - &infin; minut) <!-- .element: class="fragment" -->
+2. Konfiguracja do realizacji zadania (20-60 minut) <!-- .element: class="fragment" start="2" -->
+3. Właściwe wdrożenie maszyny do systemu (~5 minut) <!-- .element: class="fragment" start="3" -->
 
 Note: 1. Konta użytkowników, instalacja aktualizacji, konfiguracja sieci.
 2. Instalacja kompilatorów, narzędzi, Dockera, koparki bitcoinów...
@@ -486,39 +508,35 @@ Note: 1. Konta użytkowników, instalacja aktualizacji, konfiguracja sieci.
 
 ----
 
-## Cykl życia maszyny wirtualnej
+## Windows Server Core
 
-TODO: Obrazek
-```
-Bazowy obraz systemu -> Obraz roli w systemie -> Deployment i finalizacja maszyny
-```
+Windows *bez GUI* jest bardzo dobrym pomysłem.
+
+> The Server Core option is a minimal installation option that is available when you are deploying the Standard or Datacenter edition of Windows Server. Server Core includes most but not all server roles. **Server Core has a smaller disk footprint, and therefore a smaller attack surface due to a smaller code base.**
+
+Przy dużej dozie dostosowywania obrazu, można zejść **poniżej 4 GB!**
+
+Note: 
+
+----
+
+## Ogr ma warstwy
+
+<center><img src='images/os-layers.png'/></center>
 
 Note:
 
 ----
 
-## Wprowadzanie zmian do obrazów
+## Cykl życia maszyny wirtualnej
 
-```
- +-----------------+
- | Zmiany w rolach +-+
- +-----------------+ |
-                     |
-+--------------+     |   +------+      +-------+
-| Bazowy obraz +-----+-->+ Rola +--+-->+ Start |
-+-------+------+         +------+  |   +-------+
-        ^                          |
-+-------+-------+  +---------+     |
-| Patch Tuesday |  | Trigger +-----+
-+---------------+  +---------+
-
-```
+<center><img src='images/cykl-zycia-vm.png'/></center>
 
 Note:
 
 ---
 
-<!-- .slide: class="center" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-cicd.jpg" -->
 # CI/CD dla infrastruktury
 
 Note:
@@ -562,7 +580,7 @@ pipeline {
   }
 }
 ```
-<!-- .element class="stretch" -->
+<!-- .element: class="stretch" -->
 
 Note:
 
@@ -572,11 +590,11 @@ Note:
 
 Klasyczna instalacja agenta przez Java Web Start wymaga przeglądarki.
 
-SSH Agent? <!-- .element class="fragment" -->
+SSH Agent? <!-- .element: class="fragment" -->
 
-[Swarm plugin!](https://plugins.jenkins.io/swarm)<!-- .element class="fragment" -->
+[Swarm plugin!](https://plugins.jenkins.io/swarm)<!-- .element: class="fragment" -->
 
-[Rola w Galaxy](https://galaxy.ansible.com/reynn/jenkins-swarm/) <!-- .element class="fragment" -->
+[Rola w Galaxy](https://galaxy.ansible.com/reynn/jenkins-swarm/) <!-- .element: class="fragment" -->
 
 Note:
 
@@ -602,7 +620,7 @@ Note:
 
 ---
 
-<!-- .slide: class="center" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-challenge.jpg" -->
 # Wyzwania
 
 Lub: *Fantastyczne rozwiązania i jak je znaleźć?*
@@ -617,7 +635,7 @@ Note:
 
 **Rozwiązanie:** Cykliczne i automatyczne niszczenie i odtwarzanie środowiska z wzorców. 
 
-<!-- .element class="fragment" -->
+<!-- .element: class="fragment" -->
 
 Note:
 
@@ -627,45 +645,33 @@ Note:
 
 **Problem:** Zmiana w kodzie aplikacji wymaga zmian w narzędziach zainstalowanych w obrazie.
 
-**Rozwiązanie:** Ręczny test i zsynchronizowane przepięcie środowiska. <!-- .element class="fragment" -->
+**Rozwiązanie:** Ręczny test i zsynchronizowane przepięcie środowiska. 
 
-**Rozwiązanie:** Docker. <!-- .element class="fragment" -->
+<!-- .element: class="fragment" -->
 
-Note:
+**Rozwiązanie:** Docker. 
 
----
-
-## Z Waszych połączonych mocy...
-
-![ci-diagram](images/ci-diagram.png)
-
-Note:
-
-----
-
-## Zarządzanie środowiskiem używając Ansible
-
-Ansible + VMWare = :|
-
-pyVmomi przychodzi na ratunek.
+<!-- .element: class="fragment" -->
 
 Note:
 
 ---
 
-# Co na przyszłość?
+## Continuous Improvement?
 
-[Terraform?](https://www.terraform.io) <!-- .element class="fragment" -->
+[Terraform?](https://www.terraform.io) <!-- .element: class="fragment" -->
 
-[Packer?](https://www.packer.io) <!-- .element class="fragment" -->
+[Packer?](https://www.packer.io) <!-- .element: class="fragment" -->
 
-[Boxstarter?](http://boxstarter.org) <!-- .element class="fragment" -->
+[Boxstarter?](http://boxstarter.org) <!-- .element: class="fragment" -->
+
+[Blog o automatyzacji zadań na Windowsie](http://www.hurryupandwait.io/blog/) <!-- .element: class="fragment" -->
 
 Note:
 
 ---
 
-<!-- .slide: class="center" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-newyork.jpg" -->
 # Czy Windows w systemie Continuous Integration może nie być obywatelem gorszego sortu?
 
 Note:
@@ -677,4 +683,22 @@ Note:
 
 Pytania? 
 
-[e-mail](mailto:hello@wurbanski.me) <!-- .element class="fragment" -->
+[e-mail](mailto:hello@wurbanski.me) <!-- .element: class="fragment" -->
+
+----
+
+## Ack
+
+Zdjęcia z Unsplash: 
+
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@kalenemsley?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Kalen Emsley"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Kalen Emsley</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@dose?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Dose Media"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Dose Media</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@markusspiske?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Markus Spiske"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Markus Spiske</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@freeche?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Thomas Kvistholt"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Thomas Kvistholt</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@fcracer?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Farzaan Kassam"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Farzaan Kassam</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@nordwood?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from NordWood Themes"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">NordWood Themes</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@dankapeter?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Danka &amp; Peter"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Danka &amp; Peter</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@rawpixel?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from rawpixel.com"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">rawpixel.com</span></a>
+<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@overide?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Eugene Lim"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Eugene Lim</span></a>
+
+Oraz własne :)

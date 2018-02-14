@@ -1,6 +1,11 @@
 OUTPUT := _out
 
-REVEAL_MD := ./node_modules/.bin/reveal-md
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+workdir := $(dir $(mkfile_path))
+
+mogrify := mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 85
+
+REVEAL_MD := $(workdir)/./node_modules/.bin/reveal-md
 REVEAL_FLAGS := --static
 
 SLIDES_DIR := slides
@@ -24,10 +29,13 @@ $(OUTPUT)/index.html: generate_index.py
 	@./generate_index.py $(SLIDES_DIR)
 	@mv index.html $(OUTPUT)/
 
-slides: __create $(OUTFILES)
+slides: __create $(OUTFILES) optimize_images
 
 $(OUTPUT)/%/index.html: $(SLIDES_DIR)/%.md
-	@$(REVEAL_MD) $(REVEAL_FLAGS) ${dir $@} $<
+	@(cd $(SLIDES_DIR); $(REVEAL_MD) --static $(workdir)${dir $@} --static-dirs images $(notdir $<) )
+
+optimize_images: 
+	@which mogrify && find $(workdir)$(OUTPUT) -type d -name images -exec $(mogrify) {}/*.jpg \; || echo "imagemagick not installed, skipping..."
 
 serve:
 	@$(REVEAL_MD) -w $(SLIDES_DIR) --theme white --highlight-theme ocean
