@@ -30,4 +30,5 @@ $(OUTPUT)/%/index.html: $(SLIDES_DIR)/%.md
 	@$(REVEAL_MD) $(REVEAL_FLAGS) ${dir $@} $<
 
 serve:
-	@$(REVEAL_MD) -w $(SLIDES_DIR)
+	@$(REVEAL_MD) -w $(SLIDES_DIR) --theme white --highlight-theme ocean
+
