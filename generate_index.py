@@ -22,11 +22,12 @@ if __name__ == '__main__':
     index = env.get_template('index.html')
 
     slidesets = []
-    for slides in glob(os.path.join(slides_dir, '*.md')):
-        identifier = os.path.splitext(os.path.basename(slides))[0]
-        md_file = frontmatter.load(slides)
+    for slides in glob(os.path.join(slides_dir, '*', 'slides.md')):
+        identifier = os.path.basename(os.path.dirname(slides))
+        with open(slides) as f:
+            metadata, _ = frontmatter.parse(f.read())
         slidesets.append(dict(identifier=identifier,
-                              metadata=md_file.metadata))
+                              metadata=metadata))
 
     with open('index.html', 'w') as index_file:
         index_file.write(index.render(slidesets=slidesets).encode("utf-8"))

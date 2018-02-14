@@ -1,7 +1,7 @@
 ---
 title: Czy Windows w systemie Continuous Integration może być obywatelem pierwszej kategorii?
 theme: white
-highlightTheme: idea
+highlightTheme: ocean
 presented:
   - date: 15.02.2018
     where: SysOps/DevOps Meetup Gdańsk #2

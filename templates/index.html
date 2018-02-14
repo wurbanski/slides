@@ -1,70 +1,83 @@
 <html>
-    <head>
-        <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-				<style>
+  <head>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <style>
 body {
-	width: 100wh;
-	height: 90vh;
-	background: linear-gradient(-45deg, #00487c, #3e6680, #153b50);
-	background-size: 300% 300%;
-	-webkit-animation: Gradient 60s ease infinite;
-	-moz-animation: Gradient 60s ease infinite;
-	animation: Gradient 60s ease infinite;
+  width: 100wh;
+  height: 90vh;
+  background: linear-gradient(-45deg, #00487c, #3e6680, #153b50);
+  background-size: 300% 300%;
+  -webkit-animation: Gradient 60s ease infinite;
+  -moz-animation: Gradient 60s ease infinite;
+  animation: Gradient 60s ease infinite;
 }
 
-@-webkit-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
-}
+  @-webkit-keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
+    }
+  }
 
-@-moz-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
-}
+  @-moz-keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
+    }
+  }
 
-@keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
-}
+  @keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
+    }
+  }
 
-</style>
-    </head>
+    </style>
+  </head>
+  
+  <body>
     <div class="container-fluid">
-{% for slideset in slidesets %}
-<div class="row">
-<div class="col-sm-8 offset-sm-2 my-3">
-<div class="card">
-    <div class="card-body">
-        <h2 class="card-title">{{ slideset['metadata']['title'] }}</h2>
-    <p class="card-text"><a href="{{ slideset['identifier'] }}">Link</a></p>
+    {% for slideset in slidesets %}
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2 my-3">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">{{ slideset['metadata']['title'] }}</h2>
+            {%- if slideset.metadata.presented -%}
+            <p class="card-text">Presented on:
+            <ul>
+              {%- for event in slideset.metadata.presented -%}
+              <li>{{ event.date }}: <em>{{ event.where }}</em></li>
+              {%- endfor -%}
+            </ul>
+            </p>
+            {%- endif -%}
+            <p class="card-text"><a href="{{ slideset.identifier }}">Link</a></p>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
-{% endfor %}
-    </div>
+    {% endfor %}
+  </div>
+  <a href="https://github.com/wurbanski/slides"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+  </body>
 </html>
