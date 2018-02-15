@@ -39,7 +39,10 @@ $(OUTPUT)/index.html: generate_index.py
 
 # index per-slidedeck
 $(OUTPUT)/%/index.html: $(SLIDES_DIR)/%/slides.md
-	@(cd $(dir $<); $(REVEAL_MD) --static $(WORKDIR)${dir $@} --static-dirs images $(notdir $<) )
+	@(sed -r -e '/^Note:/,/^----?$$/{//!d}' -e '/^Note:/d' $< > $<.stripped; \
+		cd $(dir $<); \
+		$(REVEAL_MD) --static $(WORKDIR)${dir $@} --static-dirs images $(notdir $<).stripped\
+	)
 
 # Image optimization before publishing
 $(WORKDIR)$(OUTPUT)/.optimized: $(OUTPUT) slides
