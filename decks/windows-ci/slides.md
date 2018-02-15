@@ -82,14 +82,16 @@ revealOptions:
 .pic-bg p {
   background: rgba(255,255,255,0.75);
   border-radius: 10px;
-  padding: 10px;
-  width: auto;
+  padding: 10px 40px;
+  width: fit-content;
+  margin: auto;
+  margin-top: 1em;
 }
 </style>
 
 ## Czy Windows w systemie Continuous Integration może być obywatelem pierwszej kategorii?
 
-Wojciech Urbański
+**Wojciech Urbański**
 
 Note: Według *prawa nagłówków Betteridge'a* na każdy nagłówek będący pytaniem można odpowiedzieć przecząco. Odpowiedź na dzisiejsze pytanie pozwolę sobie oczywiście zostawić na koniec.
 
@@ -114,7 +116,7 @@ Note: Zanim zaczniemy, wyjaśnijmy kilka spraw. (...) Chętnie przedyskutuję al
 ---
 
 <!-- .slide: data-background="./images/bg-about.jpg" -->
-## O mnie
+## Wojciech Urbański
 
 **Początki:** Administrator SKOS PG. Całe *życie zawodowe* w CI.
 
@@ -684,14 +686,13 @@ Note:
 
 Pytania? 
 
-[e-mail](mailto:hello@wurbanski.me) 
+kontakt: [e-mail](mailto:hello@wurbanski.me) 
 
-<!-- .element: class="fragment" -->
-
+![codilime](images/codilime-bk.png)
 
 ----
 
-## Ack
+## Źródła
 
 Zdjęcia z Unsplash: 
 
