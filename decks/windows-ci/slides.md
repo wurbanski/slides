@@ -383,6 +383,8 @@ Wspiera wiele opcji uwierzytelnienia: `basic auth`, `certificate`, `kerberos`, `
 
 Note: Od ansible 1.7 wspierany jest Windows. Bezagentowo.
 
+The Credential Security Support Provider protocol (CredSSP) is a Security Support Provider that is implemented by using the Security Support Provider Interface (SSPI). CredSSP lets an application delegate the user's credentials from the client to the target server for remote authentication.
+
 ----
 
 ## Konfiguracja
