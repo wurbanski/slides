@@ -14,6 +14,8 @@ if __name__ == '__main__':
         print("Not enough arguments. Exiting...")
         exit(1)
 
+    gtag = os.environ.get('GTAG', None)
+
     env = Environment(
         loader=PackageLoader('generate_index', 'templates'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -30,6 +32,6 @@ if __name__ == '__main__':
                               metadata=metadata))
 
     with open('index.html', 'w') as index_file:
-        index_file.write(index.render(slidesets=slidesets).encode("utf-8"))
+        index_file.write(index.render(slidesets=slidesets, gtag=gtag).encode("utf-8"))
 
     print("Written index.html.")
