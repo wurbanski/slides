@@ -1,7 +1,7 @@
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 WORKDIR := $(dir $(mkfile_path))
 
-REVEAL_MD := $(WORKDIR)/node_modules/.bin/reveal-md
+REVEAL_MD := npx reveal-md
 REVEAL_THEME := white
 HIGHLIGHT_THEME := ocean
 
