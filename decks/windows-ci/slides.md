@@ -5,6 +5,9 @@ highlightTheme: ocean
 presented:
   - date: 15.02.2018
     where: SysOps/DevOps Meetup Gdańsk #2
+    link:
+      name: "[YouTube]"
+      url: "https://www.youtube.com/watch?v=sIJn403kM4o"
 revealOptions:
   transition: fade
   transitionSpeed: normal

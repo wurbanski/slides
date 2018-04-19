@@ -77,7 +77,7 @@ body {
 							<p class="card-text">Presented on:
 							<ul>
 								{%- for event in slideset.metadata.presented -%}
-								<li>{{ event.date }}: <em>{{ event.where }}</em></li>
+                <li>{{ event.date }}: <em>{{ event.where }}</em>{%- if event.link %} <a href="{{ event.link.url }}">{{ event.link.name }}</a>{%- endif -%}</li>
 								{%- endfor -%}
 							</ul>
 							</p>
