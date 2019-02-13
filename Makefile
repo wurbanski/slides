@@ -25,7 +25,7 @@ index: $(OUTPUT) $(OUTPUT)/index.html
 slides: $(OUTPUT) $(OUTFILES)
 
 serve:
-	@$(REVEAL_MD) -w $(SLIDES_DIR) --theme $(REVEAL_THEME) --highlight-theme $(HIGHLIGHT_THEME)
+	@(cd $(SLIDES_DIR); $(REVEAL_MD) --theme $(REVEAL_THEME) --highlight-theme $(HIGHLIGHT_THEME))
 
 # Output directory
 $(OUTPUT):
