@@ -73,7 +73,7 @@ body {
 				<div class="col-sm-8 offset-sm-2 my-3">
 					<div class="card">
 						<div class="card-body">
-							<h2 class="card-title">{{ slideset['metadata']['title'] }}</h2>
+              <a href="{{ slideset.identifier }}"><h2 class="card-title">{{ slideset['metadata']['title'] }}</h2></a>
 							{%- if slideset.metadata.presented -%}
 							<p class="card-text">Presented on:
 							<ul>
@@ -83,7 +83,6 @@ body {
 							</ul>
 							</p>
 							{%- endif -%}
-							<p class="card-text"><a href="{{ slideset.identifier }}">Link</a></p>
 						</div>
 					</div>
 				</div>
