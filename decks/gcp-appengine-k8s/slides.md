@@ -5,6 +5,9 @@ highlightTheme: ocean
 presented:
   - date: 12.02.2019
     where: Tech.3camp #52
+    link:
+      name: "[vimeo]"
+      url: "https://vimeo.com/320333121"
 revealOptions:
   transition: fade
   transitionSpeed: normal
@@ -499,7 +502,7 @@ Klaster k8s:
 
 Aplkacja stworzona do uruchomienia w App Engine może stosunkowo łatwo zostać przeniesiona do Kubernetesa
 
-PaaS (np. App Engine) dają dużo możliwości dla mało- i średniowymagających aplikacji o nieskomplikowanej architekturze i warto je poznać
+PaaS (np. App Engine) dają dużo możliwości dla mało- i średnio wymagających aplikacji o nieskomplikowanej architekturze i warto je poznać
 
 Kubernetesa trzeba dobrze poznać, ale daje bardzo duże możliwości kontroli aplikacji
 
