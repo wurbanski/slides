@@ -98,7 +98,7 @@ revealOptions:
 
 </style>
 
-## 12 Factor Apps - the steps between using cloud and being cloud ready
+## 12 Factor Apps - the steps between using cloud and being cloud native
 
 **Wojciech Urbański**
 
@@ -129,7 +129,7 @@ Note: Aktualnie współpracuję z Codilime
 
 ----
 
-## Cloud Enabled or Cloud Native?
+## Cloud Enabled vs Cloud Native
 
 Cloud Enabled:
 * Taking advantage of flexible resources
@@ -141,7 +141,7 @@ Cloud Native:
 
 ---
 
-<!-- .slide: class="center pic-bg" data-background="./images/bg-cloud.jpg" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-cubes.jpg" -->
 
 ## 12 Factor Apps
 
@@ -167,7 +167,7 @@ Explicitly declare and isolate dependencies
 
 ---
 
-<!-- .slide: class="center pic-bg" data-background="./images/bg-cloud.jpg" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-immutable.jpg" -->
 
 ## 3. Config
 
@@ -183,7 +183,7 @@ Treat backing services as attached resources
 
 ---
 
-<!-- .slide: class="center pic-bg" data-background="./images/bg-cloud.jpg" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-immutable.jpg" -->
 
 ## 5. Build, release, run
 
@@ -199,7 +199,7 @@ Execute the app as one or more stateless processes
 
 ---
 
-<!-- .slide: class="center pic-bg" data-background="./images/bg-cloud.jpg" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-immutable.jpg" -->
 
 ## 7. Port binding
 
@@ -215,7 +215,7 @@ Scale out via the process model
 
 ---
 
-<!-- .slide: class="center pic-bg" data-background="./images/bg-cloud.jpg" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-immutable.jpg" -->
 
 ## 9. Disposability
 
@@ -231,7 +231,7 @@ Keep development, staging, and production as similar as possible
 
 ---
 
-<!-- .slide: class="center pic-bg" data-background="./images/bg-cloud.jpg" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-immutable.jpg" -->
 
 ## 11. Logs
 
@@ -247,7 +247,7 @@ Run admin/management tasks as one-off processes
 
 ---
 
-<!-- .slide: class="center pic-bg" data-background="./images/bg-cloud.jpg" -->
+<!-- .slide: class="center pic-bg" data-background="./images/bg-immutable.jpg" -->
 
 # Theory meets practice
 
