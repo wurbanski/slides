@@ -13,9 +13,12 @@ OUTFILES := ${patsubst $(SLIDES_DIR)/%/slides.md,$(OUTPUT)/%/index.html,$(SRC_FI
 
 MOGRIFY := mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 85
 
-.PHONY: all slides index clean
+.PHONY: all slides index static clean
 
 all: slides index $(WORKDIR)$(OUTPUT)/.optimized
+
+static: $(OUTPUT)
+	cp -r static/* $(OUTPUT)
 
 clean:
 	@test ! -d $(OUTPUT) || rm -rf $(OUTPUT)
