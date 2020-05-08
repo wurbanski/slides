@@ -15,9 +15,10 @@ MOGRIFY := mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 85
 
 .PHONY: all slides index static clean
 
-all: slides index $(WORKDIR)$(OUTPUT)/.optimized
+all: slides index static $(WORKDIR)$(OUTPUT)/.optimized
 
 static: $(OUTPUT)
+	@echo "Publishing static/"
 	cp -r static/* $(OUTPUT)
 
 clean:
