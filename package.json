@@ -4,7 +4,7 @@
   "description": "",
   "dependencies": {
     "phantomjs": "^2.1.7",
-    "reveal-md": "^2.4.0"
+    "reveal-md": "^5.4.0"
   },
   "devDependencies": {},
   "repository": {
